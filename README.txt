@@ -1,12 +1,19 @@
 
--------- Book2Vec -------------
-
-
+   -------- Book2Vec -------------
 
 
 This project seeks to learn word vectors from books. These vectors can then be used to recommend "author specific sysnonyms" for a given word, as well as draw insights from different authors semantic patterns. 
 
-Current Structure of book2Vec-Gensim.py
+
+Current Structure: 
+
+   - book2Vec-Gensim.py: Most current model. Work in progress. 
+   - book2Vec(OlderTensorflowModel).py: Older Model. More thouroughly developed/ customized, but no longer in use for efficiency reasons.
+
+    ---------------------------
+
+The Structure of book2Vec-Gensim.py
+
    - The main() function prompts you to choose a book to use.
    - The PDF is read, broken down into sentences, and then to words.
    - A "gensim" word2Vec model is then declared. The model uses a "Skip Gram" model.
@@ -16,9 +23,13 @@ Current Structure of book2Vec-Gensim.py
    - The skipGram model is trained using Gradient Desent on a SoftMax output. Negative Sampling is used to for efficiency.
    - The output is then used for various user interface functions. Any given word's VectorRepresentation can be extracted through "model.wv[word]"
    
+      ---------------------------
 
 The Structure of book2Vec(OlderTensorflowModel).py
-   A similar model is built manually in book2Vec(OlderTensorflowModel).py. The model is replaced by the Gensim model for training efficiency and optimization. 
+
+   A similar model is built manually in book2Vec(OlderTensorflowModel).py. The barebones approach of the model allows for maximum customization/ understanding of information flow durring and after training.
+
+   The model is replaced by the Gensim model for training efficiency and optimization. 
    This Tensorflow file autosaves a model and vocabulary after training (the option is given to load or retrain on the next run). 1 pretrained model of Moby Dick is included in the files.
    Execute main() to interact.
 
