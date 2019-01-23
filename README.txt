@@ -7,8 +7,8 @@ This project seeks to learn word vectors from books. These vectors can then be u
 
 Current Structure: 
 
-   - book2Vec-Gensim.py: Most current model. Work in progress. 
-   - book2Vec(OlderTensorflowModel).py: Older Model. More thouroughly developed/ customized, but no longer in use for efficiency reasons.
+   - book2Vec-Gensim.py: Most current / efficient model. Work in progress. 
+   - book2Vec(OlderTensorflowModel).py: Older Model. More granularly developed/ customized, but no longer in use for efficiency reasons.
 
     ---------------------------
 
