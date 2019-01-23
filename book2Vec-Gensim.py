@@ -105,7 +105,7 @@ def complexQuery(query, model,vocab):
    return
 
 
-
+# Recursivly calls itself to add all terms to Positives or Negatives until it reaches the end of query.
 def queryOperations(query, model, positives , negatives , startI=0, curOperation = '+'):
    i = copy.copy(startI)
    while i < len(query)-1:
