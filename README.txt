@@ -41,15 +41,17 @@ The Structure of book2Vec(OlderTensorflowModel).py
 
 Libraries Used: 
 
+PyPDF2 (pip install PyPDF2)
+gensim (pip install gensim)
+numpy as np
+tensorflow as tf
+
 collections (import collections)
 random (import random)
 math (import math)
 os (import os.path)
 json (import json)
 
-numpy as np
-tensorflow as tf
-PyPDF2 (pip install PyPDF2)
 
 
 
