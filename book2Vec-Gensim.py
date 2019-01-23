@@ -1,6 +1,7 @@
 
 
 import collections
+import copy
 import random
 import math
 import os.path
@@ -12,6 +13,10 @@ import PyPDF2
 
 import json
 
+
+
+
+# ------------ Function to Select a Book File -------------
 
 
 def bookSelector():
@@ -67,36 +72,69 @@ def wordify(strSentences):
 
 
 
+
+# -------- Querier Functions ------------------
+
+
+
+
 def runQuerier(model):
    vocab = model.wv.vocab.keys()
-   print("\nNow in 'synonym' Mode ")
+   print("\nNow in 'synonym' Mode. \n\n You may enter a single word OR\n add words together (using '+' or '-') to get words similar to the sum or differnce of their vecotrs. \n For example: king - man + woman = queen! \n\nEnter 'QUIT' To escape. ")
    curQuery = ''
    while curQuery != "QUIT":
       curQuery = input("\nInput a Word to see its synonyms: ")
-      if curQuery in vocab:
+      if '+' in curQuery or '-' in curQuery:
+         curQuery = curQuery.replace(' ', '')
+         complexQuery(curQuery, model, vocab)
+      elif curQuery in vocab:
          print(model.wv.most_similar(positive = [curQuery], topn = 15))
       else: print("The word you Input was not in the book's vocabulary, try again!")
    return
-'''
-
-def enterAssistant(model):
-   userString = ''
-   while (keypress != escape asci):
-      if keypress == alphabetic or keywpress == space:
-         userString += keypress
-         updateUI(userString)
 
 
 
-def updateUI(userString):
-   lastChar = userString[-1]
-   lastWord = getLastWord(userString) #maybe just keep a running second string of the most recent word...
-   if lastChar = (" "):
-      mostSimilar = model.wv.most_similar(positive = [lastWord])[0]
-      if mostSimilar[1] >= 0.8:
-         userString = userString[:-1] + mostSimilar[0] + userString[-1] #some other more efficient insert equation. 
-   return userString
-'''
+def complexQuery(query, model,vocab):
+   positives, negatives = [], []
+   queryOperations(query, model, positives, negatives)
+   for word in positives+negatives:
+      if word not in vocab:
+         print("One of the Words you input is not in the book's vocabulary, try again!")
+         return
+   print(model.wv.most_similar(positive = positives, negative = negatives, topn=15))
+   return
+
+
+
+def queryOperations(query, model, positives , negatives , startI=0, curOperation = '+'):
+   i = copy.copy(startI)
+   while i < len(query)-1:
+      while i < len(query)-1 and query[i] != '+' and query[i] != '-':
+         i += 1
+      newOperation = query[i]
+      if i == len(query) -1:
+         appendPosOrNeg(curOperation, query[startI: i+1], positives, negatives)
+      else:
+         appendPosOrNeg(curOperation, query[startI: i], positives, negatives)
+      curOperation = newOperation
+      i = queryOperations(query, model, positives, negatives, i+1, curOperation)
+   return i
+
+
+
+def appendPosOrNeg(curOperation, word, positives, negatives):
+   if curOperation == '+':
+      positives.append(word)
+   else: 
+      negatives.append(word)
+   print(word)
+   #put the if:else: here. in the queryOp func, put something else that passes different words in based on "if we're at the end" or not.
+   return
+
+
+
+
+# ----------- THE MODEL  --------------------
 
 
 def startGensim():
@@ -120,6 +158,10 @@ def startGensim():
 
 
 startGensim()
+
+
+
+
 
 
 
