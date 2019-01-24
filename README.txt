@@ -18,9 +18,12 @@ The Structure of book2Vec-Gensim.py
    - The PDF is read, broken down into sentences, and then to words.
    - A "gensim" word2Vec model is then declared. The model uses a "Skip Gram" model.
 
-   - After training, the model enters 'synonym' mode. The user can input a word, in exchange for similar words learned from the context of the author's writing. 
-   - The user may also enter a 'Word Equation,' to retrieve the vectors most similar to the addition and subtraction of words. For example: 'king - man + woman ' has been known to return 'Queen.' 
+   - After training, the model enters 'synonym' mode. The user can enter a word, in exchange for similar words learned from the context of the author's writing. 
+   - The user may also enter a 'Word Equation,' to retrieve the vectors most similar to the addition and subtraction of words. For example: 'King - Man + Woman ' has been known to return 'Queen.' 
    - Manually, in the code, a word's VectorRepresentation can be extracted through "model.wv[word]"
+
+
+    ---------------------------
 
 
 Summary of Skip Gram Model:
